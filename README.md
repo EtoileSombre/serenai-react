@@ -1,16 +1,132 @@
-# React + Vite
+# SerenAI 🌿
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Une application de bien-être mental propulsée par l'IA, conçue pour accompagner les utilisateurs dans leur parcours de santé mentale au quotidien.
 
-Currently, two official plugins are available:
+> ⚠️ **Avertissement important** : SerenAI n'est pas un outil médical et ne remplace pas une consultation professionnelle.  
+> En cas d'urgence : **15** | Écoute 24/7 : **3114**
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) (or [oxc](https://oxc.rs) when used in [rolldown-vite](https://vite.dev/guide/rolldown)) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## 📋 Description
 
-## React Compiler
+SerenAI est une application web moderne qui propose des outils d'accompagnement pour le bien-être mental, incluant :
 
-The React Compiler is currently not compatible with SWC. See [this issue](https://github.com/vitejs/vite-plugin-react/issues/428) for tracking the progress.
+- 🏠 **Accueil** - Page d'accueil avec présentation de l'application
+- ✅ **Check-in** - Suivi quotidien de votre état émotionnel
+- 💬 **Chat** - Discussion avec une IA bienveillante
+- 🧘 **Exercices** - Activités de relaxation et de méditation
+- 📓 **Journal** - Espace d'écriture personnel
+- 📚 **Ressources** - Documentation et liens utiles
+- ⚙️ **Paramètres** - Configuration de l'application
 
-## Expanding the ESLint configuration
+## 🚀 Technologies
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+- **React 19** - Framework UI moderne
+- **Vite** - Build tool ultra-rapide
+- **React Router v7** - Navigation côté client
+- **ESLint** - Qualité de code
+- **SWC** - Compilation rapide
+
+## 📦 Installation
+
+### Prérequis
+
+- Node.js (v18 ou supérieur)
+- npm ou yarn
+
+### Étapes
+
+1. **Cloner le repository**
+```bash
+git clone https://github.com/EtoileSombre/serenai-react.git
+cd serenai-react
+```
+
+2. **Installer les dépendances**
+```bash
+npm install
+```
+
+3. **Lancer le serveur de développement**
+```bash
+npm run dev
+```
+
+L'application sera accessible sur `http://localhost:5173`
+
+## 🛠️ Scripts disponibles
+
+```bash
+# Lancer en mode développement
+npm run dev
+
+# Construire pour la production
+npm run build
+
+# Prévisualiser le build de production
+npm run preview
+
+# Linter le code
+npm run lint
+```
+
+## 📁 Structure du projet
+
+```
+serenai-react/
+├── public/           # Assets statiques
+├── src/
+│   ├── pages/       # Composants de pages
+│   │   ├── Home.jsx
+│   │   ├── Checking.jsx
+│   │   ├── Chat.jsx
+│   │   ├── Exercices.jsx
+│   │   ├── Journal.jsx
+│   │   ├── Resources.jsx
+│   │   └── Settings.jsx
+│   ├── App.jsx      # Composant principal avec navigation
+│   ├── main.jsx     # Point d'entrée + configuration du router
+│   ├── App.css      # Styles de l'application
+│   └── index.css    # Styles globaux
+├── index.html       # Template HTML
+├── vite.config.js   # Configuration Vite
+└── package.json     # Dépendances et scripts
+```
+
+## 🎨 Fonctionnalités à venir
+
+- [ ] Intégration d'une API d'IA conversationnelle
+- [ ] Système d'authentification utilisateur
+- [ ] Base de données pour le journal personnel
+- [ ] Exercices de respiration interactifs
+- [ ] Statistiques et visualisation des émotions
+- [ ] Mode sombre
+- [ ] Progressive Web App (PWA)
+
+## 🤝 Contribution
+
+Les contributions sont les bienvenues ! N'hésitez pas à :
+
+1. Fork le projet
+2. Créer une branche (`git checkout -b feature/amelioration`)
+3. Commit vos changements (`git commit -m 'Ajout d'une fonctionnalité'`)
+4. Push vers la branche (`git push origin feature/amelioration`)
+5. Ouvrir une Pull Request
+
+## 📄 Licence
+
+Ce projet est sous licence MIT.
+
+## 👤 Auteur
+
+**EtoileSombre**
+
+- GitHub: [@EtoileSombre](https://github.com/EtoileSombre)
+
+## 🙏 Remerciements
+
+- React Team pour l'incroyable framework
+- Vite pour l'expérience de développement moderne
+- La communauté open source
+
+---
+
+*Développé avec ❤️ pour le bien-être mental*

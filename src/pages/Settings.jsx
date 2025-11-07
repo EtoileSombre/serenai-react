@@ -1,8 +1,18 @@
-export default function Settings() {
+import { storage } from '../services/storage';
+
+export default function Settings(){
+  function erase(){
+    if(confirm('Effacer toutes tes données locales ?')) {
+      storage.clear();
+      alert('Données locales effacées.');
+      location.reload();
+    }
+  }
   return (
-    <section>
+    <section className="card">
       <h2>Paramètres</h2>
-      <p>Contenu à venir 😊</p>
+      <button onClick={erase}>Effacer mes données locales</button>
+      <p style={{marginTop:10,color:'#666'}}>Tes données sont stockées uniquement dans ton navigateur (LocalStorage).</p>
     </section>
   );
 }

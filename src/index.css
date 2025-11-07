@@ -26,3 +26,13 @@ body {
   padding: 20px;
   flex: 1;
 }
+
+.card{background:#fff;border:1px solid #e9e7ef;border-radius:16px;padding:16px}
+
+.row{display:flex;gap:12px;flex-wrap:wrap}
+
+.bubble{border:1px solid #e1e8ff;border-radius:14px;padding:10px 12px;max-width:75%}
+
+.bubble.me{align-self:flex-end;background:#eef}
+
+.bubble.ai{align-self:flex-start;background:#f4f7ff}
