@@ -4,9 +4,9 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import App from './App';
 import Home from './pages/Home';
-import Checkin from './pages/Checkin';
+import Checking from './pages/Checking';
 import Chat from './pages/Chat';
-import Exercises from './pages/Exercises';
+import Exercices from './pages/Exercices';
 import Journal from './pages/Journal';
 import Resources from './pages/Resources';
 import Settings from './pages/Settings';
@@ -19,9 +19,9 @@ const router = createBrowserRouter([
     element: <App />,
     children: [
       { index: true, element: <Home /> },
-      { path: "checkin", element: <Checkin /> },
+      { path: "checkin", element: <Checking /> },
       { path: "chat", element: <Chat /> },
-      { path: "exercises", element: <Exercises /> },
+      { path: "exercises", element: <Exercices /> },
       { path: "journal", element: <Journal /> },
       { path: "resources", element: <Resources /> },
       { path: "settings", element: <Settings /> },
