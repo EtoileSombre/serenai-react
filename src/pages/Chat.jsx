@@ -3,7 +3,8 @@ import SafetyBanner from '../components/SafetyBanner.jsx';
 import { storage } from '../services/storage';
 import { aiReply } from '../services/ailite';
 import { checkRisk } from '../services/safety';
-import PageWrapper from '../components/PageWrapper';
+import Modal from '../components/Modal';
+import Button from '../components/ui/Button';
 
 export default function Chat(){
   const [messages,setMessages] = useState(() => {
@@ -16,6 +17,7 @@ export default function Chat(){
   });
   const [draft,setDraft] = useState('');
   const [riskMsg,setRiskMsg] = useState(null);
+  const [open,setOpen] = useState(false);
   const endRef = useRef(null);
 
   useEffect(()=>{ endRef.current?.scrollIntoView({behavior:'smooth'}); }, [messages]);
@@ -34,11 +36,24 @@ export default function Chat(){
     setDraft('');
   }
 
+  function resetChatConfirmed(){
+    storage.resetMessages();
+    const first = { id: crypto.randomUUID(), sender:'ai', text: "Conversation réinitialisée 🌿 Comment te sens-tu maintenant ?", createdAt: Date.now() };
+    storage.addMessage(first);
+    setMessages(storage.listMessages());
+    setOpen(false);
+  }
+
   return (
-    <PageWrapper>
+    <>
       <section className="card">
         <h2>Chat bien-être 🧘‍♀️</h2>
         <SafetyBanner message={riskMsg} />
+
+        <div style={{display:'flex', justifyContent:'flex-end', marginBottom:'8px'}}>
+          <Button variant="danger" onClick={()=>setOpen(true)}>🔄 Reset conversation</Button>
+        </div>
+
         <div aria-live="polite" style={{display:'flex',flexDirection:'column',gap:10,maxHeight:420,overflow:'auto',padding:'8px 0'}}>
           {messages.map(m=>(
             <div key={m.id} className={m.sender==='user' ? 'bubble me' : 'bubble ai'}>
@@ -47,11 +62,23 @@ export default function Chat(){
           ))}
           <div ref={endRef} />
         </div>
+        <div style={{display:'flex', justifyContent:'flex-end', marginBottom:'8px'}}>
+          <Button variant="danger" onClick={()=>setOpen(true)}>🔄 Reset conversation</Button>
+        </div>
         <form onSubmit={send} className="row" style={{marginTop:12}}>
           <input aria-label="Message" value={draft} onChange={e=>setDraft(e.target.value)} placeholder="Écris ici…" />
-          <button type="submit" aria-label="Envoyer">Envoyer</button>
+          <button className="btn" type="submit" aria-label="Envoyer">Envoyer</button>
         </form>
       </section>
-    </PageWrapper>
+
+      <Modal open={open} onClose={()=>setOpen(false)}>
+        <h3 style={{marginTop:0}}>Réinitialiser la conversation ?</h3>
+        <p style={{opacity:.85}}>Cette action efface les messages du chat, pas tes humeurs.</p>
+        <div style={{display:'flex', gap:10, justifyContent:'flex-end'}}>
+          <Button variant="ghost" onClick={()=>setOpen(false)}>Annuler</Button>
+          <Button variant="danger" onClick={resetChatConfirmed}>Oui, réinitialiser</Button>
+        </div>
+      </Modal>
+    </>
   );
 }

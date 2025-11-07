@@ -1,51 +1,76 @@
-body {
-  margin: 0;
-  font-family: Arial, sans-serif;
-  background: #fafafa;
+/* ========== TOKENS ========== */
+:root{
+  --bg0:#090d18; --bg1:#0e1224;
+  --ink:#e9ecf6; --muted:#a5a8b4;
+  --card:rgba(18,22,39,.60); --border:rgba(255,255,255,.12);
+  --accent:#8b5cf6; --accent-2:#22d3ee; --danger:#ef4444;
+  --radius:18px; --radius-sm:12px; --shadow:0 30px 80px rgba(0,0,0,.35);
 }
+html,body,#root{height:100%}
+body{margin:0;background:var(--bg1);color:var(--ink);font-family:Inter,system-ui,Arial}
 
-.app-shell {
-  display: flex;
-  flex-direction: column;
-  height: 100vh;
+.sensorium{position:relative;overflow-x:hidden}
+.bg-anim{
+  position:fixed;inset:0;z-index:-3;
+  background:radial-gradient(1200px 800px at 20% -10%,#1b1440 0%,transparent 60%),
+             radial-gradient(1200px 800px at 110% 10%,#0a2a4a 0%,transparent 60%),
+             radial-gradient(1200px 800px at 50% 120%,#221d44 0%,transparent 60%),
+             linear-gradient(120deg,#0a0d18,#10162b);
+  animation:bgShift 22s ease-in-out infinite alternate;
+  filter:saturate(1.05);
 }
-
-.topbar {
-  background: white;
-  border-bottom: 1px solid #ddd;
-  padding: 10px;
+@keyframes bgShift{
+  0%{transform:translateY(0) scale(1)}
+  100%{transform:translateY(-2%) scale(1.02)}
 }
-
-.topbar nav {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
+.grain{
+  position:fixed;inset:0;z-index:-1;pointer-events:none;mix-blend-mode:soft-light;opacity:.12;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.35'/></svg>");
+  background-size:160px 160px;
 }
-
-.page-content {
-  padding: 20px;
-  flex: 1;
+.glow{
+  position:fixed;width:520px;height:520px;border-radius:50%;
+  filter:blur(90px) saturate(140%);
+  z-index:-2;opacity:.45;pointer-events:none;
 }
+.glow-a{top:10%;left:10%;background:radial-gradient(circle,#8b5cf6 0%,transparent 60%)}
+.glow-b{bottom:0;right:5%;background:radial-gradient(circle,#22d3ee 0%,transparent 60%)}
+.dot{color:var(--accent)}
 
-.card{background:#fff;border:1px solid #e9e7ef;border-radius:16px;padding:16px}
+.app-shell{display:flex;flex-direction:column;min-height:100vh;position:relative;overflow-x:hidden}
+.glass{backdrop-filter:blur(14px);background:linear-gradient(to bottom,rgba(16,18,30,.65),rgba(16,18,30,.35))}
+.topbar,.footer{position:sticky;z-index:10;border-color:var(--border)}
+.topbar{top:0;padding:12px 16px;border-bottom:1px solid var(--border);display:flex;gap:12px;align-items:center;justify-content:space-between;border-radius:0 0 var(--radius) var(--radius)}
+.footer{bottom:0;margin-top:auto;padding:10px 16px;border-top:1px solid var(--border);color:var(--muted)}
 
+.page-content{padding:28px;max-width:1100px;margin:0 auto}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow)}
+
+.topbar nav{display:flex;gap:10px;flex-wrap:wrap}
+.topbar a{color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:12px;opacity:.9;border:1px solid transparent}
+.topbar a:hover{opacity:1;border-color:color-mix(in oklab,var(--accent) 30%,transparent)}
+.topbar a.active{background:color-mix(in oklab,var(--accent) 35%,transparent);outline:1px solid color-mix(in oklab,var(--accent) 60%,transparent)}
+
+.bubble{border:1px solid var(--border);border-radius:14px;padding:10px 12px;max-width:75%;box-shadow:0 12px 36px rgba(0,0,0,.28)}
+.bubble.me{align-self:flex-end;background:color-mix(in oklab,var(--accent) 18%,rgba(255,255,255,.02))}
+.bubble.ai{align-self:flex-start;background:color-mix(in oklab,var(--accent-2) 12%,rgba(255,255,255,.02))}
 .row{display:flex;gap:12px;flex-wrap:wrap}
+input,textarea{width:100%;padding:12px;border-radius:12px;border:1px solid var(--border);background:rgba(255,255,255,.03);color:var(--ink)}
 
-.bubble{border:1px solid #e1e8ff;border-radius:14px;padding:10px 12px;max-width:75%}
+.btn{--glow:color-mix(in oklab,var(--accent) 55%,white);position:relative;display:inline-flex;align-items:center;gap:8px;border:1px solid color-mix(in oklab,var(--accent) 40%,transparent);background:linear-gradient(to bottom right,color-mix(in oklab,var(--accent) 35%,rgba(255,255,255,.04)),rgba(255,255,255,.03));color:#fff;padding:10px 14px;border-radius:14px;cursor:pointer;box-shadow:0 8px 30px rgba(139,92,246,.25);font-family:inherit;font-size:inherit}
+.btn::after{content:"";position:absolute;inset:-2px;border-radius:16px;background:conic-gradient(from 180deg,transparent,var(--glow),transparent 60%);filter:blur(14px);opacity:.0;transition:opacity .3s ease;z-index:-1}
+.btn:hover::after{opacity:.7}
+.btn.ghost{background:rgba(255,255,255,.02);border-color:var(--border);box-shadow:none}
+.btn.danger{--glow:color-mix(in oklab,var(--danger) 55%,white);border-color:color-mix(in oklab,var(--danger) 60%,transparent);background:linear-gradient(to bottom right,color-mix(in oklab,var(--danger) 25%,rgba(255,255,255,.04)),rgba(255,255,255,.02))}
 
-.bubble.me{align-self:flex-end;background:#eef}
+.cta-shine{position:relative;overflow:hidden}
+.cta-shine::before{content:"";position:absolute;top:-120%;left:-30%;width:60%;height:300%;transform:rotate(25deg);background:linear-gradient(to right,transparent,rgba(255,255,255,.45),transparent);filter:blur(8px);transition:.6s ease}
+.cta-shine:hover::before{left:130%}
 
-.bubble.ai{align-self:flex-start;background:#f4f7ff}
+.cursor-spotlight{position:fixed;inset:0;pointer-events:none;z-index:5;background:radial-gradient(650px 450px at var(--mx,50%) var(--my,50%),rgba(255,255,255,.10),transparent 60%)}
 
-body {
-  background: radial-gradient(circle at top, #8b5cf6, #0f1115);
-  background-size: 400% 400%;
-  animation: moveBg 18s ease infinite;
-}
-
-@keyframes moveBg {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
+html[data-mood="calm"] .glow-a{background:radial-gradient(circle,#22d3ee 0%,transparent 60%)}
+html[data-mood="calm"] .glow-b{background:radial-gradient(circle,#34d399 0%,transparent 60%)}
+html[data-mood="storm"] .bg-anim{animation-duration:14s;filter:saturate(1.1) brightness(0.95)}
+html[data-mood="storm"] .glow-a{background:radial-gradient(circle,#ef4444 0%,transparent 60%)}
+html[data-mood="storm"] .glow-b{background:radial-gradient(circle,#8b5cf6 0%,transparent 60%)}

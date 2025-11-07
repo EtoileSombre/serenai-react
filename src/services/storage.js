@@ -11,6 +11,11 @@ export const storage = {
   // Chat
   listMessages: () => read().messages,
   addMessage(msg) { const s = read(); s.messages.push(msg); write(s); },
+  resetMessages() {
+    const s = read();
+    s.messages = [];   // on vide uniquement les messages
+    write(s);
+  },
   // Moods
   listMoods: () => read().moods,
   addMood(entry) { const s = read(); s.moods.push(entry); write(s); },
