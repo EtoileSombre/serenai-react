@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { storage } from '../services/storage';
+import PageWrapper from '../components/PageWrapper';
 
 export default function Checkin(){
   const [score,setScore] = useState(3);
@@ -20,8 +21,9 @@ export default function Checkin(){
   }
 
   return (
-    <section className="card">
-      <h2>Check-in d’humeur</h2>
+    <PageWrapper>
+      <section className="card">
+        <h2>Check-in d'humeur</h2>
       <form onSubmit={submit} className="row">
         <label style={{flex:'1 0 160px'}}>
           Échelle (1–5)
@@ -38,5 +40,6 @@ export default function Checkin(){
         <div><button type="submit">Enregistrer</button></div>
       </form>
     </section>
+    </PageWrapper>
   );
 }

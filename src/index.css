@@ -36,3 +36,16 @@ body {
 .bubble.me{align-self:flex-end;background:#eef}
 
 .bubble.ai{align-self:flex-start;background:#f4f7ff}
+
+body {
+  background: radial-gradient(circle at top, #8b5cf6, #0f1115);
+  background-size: 400% 400%;
+  animation: moveBg 18s ease infinite;
+}
+
+@keyframes moveBg {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+

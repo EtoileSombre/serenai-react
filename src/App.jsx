@@ -21,7 +21,7 @@ export default function App() {
       </main>
 
       <footer className="footer">
-        <small>⚠️ SerenAI n’est pas un outil médical — Urgence : 15 — Écoute 24/7 : 3114</small>
+        <small>⚠️ SerenAI n'est pas un outil médical — Urgence : 15 — Écoute 24/7 : 3114</small>
       </footer>
     </div>
   );

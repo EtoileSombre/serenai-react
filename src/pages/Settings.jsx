@@ -1,4 +1,5 @@
 import { storage } from '../services/storage';
+import PageWrapper from '../components/PageWrapper';
 
 export default function Settings(){
   function erase(){
@@ -9,10 +10,12 @@ export default function Settings(){
     }
   }
   return (
-    <section className="card">
-      <h2>Paramètres</h2>
-      <button onClick={erase}>Effacer mes données locales</button>
-      <p style={{marginTop:10,color:'#666'}}>Tes données sont stockées uniquement dans ton navigateur (LocalStorage).</p>
-    </section>
+    <PageWrapper>
+      <section className="card">
+        <h2>Paramètres</h2>
+        <button onClick={erase}>Effacer mes données locales</button>
+        <p style={{marginTop:10,color:'#666'}}>Tes données sont stockées uniquement dans ton navigateur (LocalStorage).</p>
+      </section>
+    </PageWrapper>
   );
 }

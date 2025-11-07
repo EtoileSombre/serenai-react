@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import SafetyBanner from '../components/SafetyBanner.jsx';
 import { storage } from '../services/storage';
-import { aiReply } from '../services/aiLite';
+import { aiReply } from '../services/ailite';
 import { checkRisk } from '../services/safety';
+import PageWrapper from '../components/PageWrapper';
 
 export default function Chat(){
   const [messages,setMessages] = useState(() => {
@@ -34,21 +35,23 @@ export default function Chat(){
   }
 
   return (
-    <section className="card">
-      <h2>Chat bien-être 🧘‍♀️</h2>
-      <SafetyBanner message={riskMsg} />
-      <div aria-live="polite" style={{display:'flex',flexDirection:'column',gap:10,maxHeight:420,overflow:'auto',padding:'8px 0'}}>
-        {messages.map(m=>(
-          <div key={m.id} className={m.sender==='user' ? 'bubble me' : 'bubble ai'}>
-            <p style={{margin:0}}>{m.text}</p>
-          </div>
-        ))}
-        <div ref={endRef} />
-      </div>
-      <form onSubmit={send} className="row" style={{marginTop:12}}>
-        <input aria-label="Message" value={draft} onChange={e=>setDraft(e.target.value)} placeholder="Écris ici…" />
-        <button type="submit" aria-label="Envoyer">Envoyer</button>
-      </form>
-    </section>
+    <PageWrapper>
+      <section className="card">
+        <h2>Chat bien-être 🧘‍♀️</h2>
+        <SafetyBanner message={riskMsg} />
+        <div aria-live="polite" style={{display:'flex',flexDirection:'column',gap:10,maxHeight:420,overflow:'auto',padding:'8px 0'}}>
+          {messages.map(m=>(
+            <div key={m.id} className={m.sender==='user' ? 'bubble me' : 'bubble ai'}>
+              <p style={{margin:0}}>{m.text}</p>
+            </div>
+          ))}
+          <div ref={endRef} />
+        </div>
+        <form onSubmit={send} className="row" style={{marginTop:12}}>
+          <input aria-label="Message" value={draft} onChange={e=>setDraft(e.target.value)} placeholder="Écris ici…" />
+          <button type="submit" aria-label="Envoyer">Envoyer</button>
+        </form>
+      </section>
+    </PageWrapper>
   );
 }
