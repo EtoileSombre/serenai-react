@@ -5,13 +5,13 @@ import { aiReply } from '../services/ailite';
 import { checkRisk } from '../services/safety';
 import Modal from '../components/Modal';
 import Button from '../components/ui/Button';
+import { AI_MESSAGES, createMessage } from '../constants';
 
 export default function Chat(){
   const [messages,setMessages] = useState(() => {
     const existing = storage.listMessages();
     if (existing.length) return existing;
-    const first = { id: crypto.randomUUID(), sender:'ai', createdAt: Date.now(),
-      text: "Bonjour 👋 Je suis un compagnon de bien-être (non médical). Comment te sens-tu aujourd’hui ?" };
+    const first = createMessage('ai', AI_MESSAGES.WELCOME);
     storage.addMessage(first);
     return [first];
   });
@@ -26,7 +26,7 @@ export default function Chat(){
     e.preventDefault();
     const txt = draft.trim();
     if(!txt) return;
-    const userMsg = { id: crypto.randomUUID(), sender:'user', text: txt, createdAt: Date.now() };
+    const userMsg = createMessage('user', txt);
     storage.addMessage(userMsg);
     const risk = checkRisk(txt);
     setRiskMsg(risk.message);
@@ -38,7 +38,7 @@ export default function Chat(){
 
   function resetChatConfirmed(){
     storage.resetMessages();
-    const first = { id: crypto.randomUUID(), sender:'ai', text: "Conversation réinitialisée 🌿 Comment te sens-tu maintenant ?", createdAt: Date.now() };
+    const first = createMessage('ai', AI_MESSAGES.RESET);
     storage.addMessage(first);
     setMessages(storage.listMessages());
     setOpen(false);

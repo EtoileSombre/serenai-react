@@ -3,12 +3,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import AmbientBackground from "./components/AmbientBackground.jsx";
 import CursorSpotlight from "./components/CursorSpotlight";
 import SoundToggle from "./components/SoundToggle";
-
-const page = {
-  initial: { opacity: 0, y: 24, filter: "blur(6px)" },
-  animate: { opacity: 1, y: 0, filter: "blur(0px)", transition: { duration: 0.6, ease: "easeOut" } },
-  exit:    { opacity: 0, y: -24, filter: "blur(6px)", transition: { duration: 0.35, ease: "easeIn" } }
-};
+import { PAGE_TRANSITIONS } from "./constants";
 
 export default function App() {
   const location = useLocation();
@@ -33,7 +28,7 @@ export default function App() {
 
       <main className="page-content">
         <AnimatePresence mode="wait">
-          <motion.div key={location.pathname} variants={page} initial="initial" animate="animate" exit="exit">
+          <motion.div key={location.pathname} variants={PAGE_TRANSITIONS} initial="initial" animate="animate" exit="exit">
             <Outlet />
           </motion.div>
         </AnimatePresence>
